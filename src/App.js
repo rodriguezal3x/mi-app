@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component  } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class Input extends Component {
+    render() {
+        return (
+            <input 
+                value={this.props.value}
+                onChange={this.props.onChange} 
+            />
+         );
+     }
+ }
+
+class App extends Component {
+    state = {
+        nombre: '',
+        apellido: '',
+    }
+
+    updateValue = (prop, value) => {
+        this.setState({ [prop]: value });
+    }
+    render() {
+        return (
+            <p>
+                Nombre completo: {`${this.state.nombre} ${this.state.apellido}`}
+                <Input
+                    value={this.state.nombre}
+                    onChange={e => this.updateValue('nombre', e.target.value)}
+                />
+                <Input 
+                    value={this.state.apellido}
+                    onChange={e => this.updateValue('apellido', e.target.value)}
+                />
+            </p>
+         );
+     }
+ }
 
 export default App;
